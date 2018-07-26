@@ -16,6 +16,12 @@
     </graphicData>
   </ThingDef>
 
+  <ThingDef>
+    <defName>EnergyBeam</defName>
+    <label>energy beam</label>
+    <thingClass>Suffixware.TrueLaserWeapons.EnergyBeam</thingClass>
+  </ThingDef>
+
   <ThingDef ParentName="BaseBullet">
     <defName>BeamEffect_Arasaka</defName>
     <label>beam effect</label>

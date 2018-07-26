@@ -23,7 +23,7 @@ namespace Suffixware.TrueLaserWeapons
 
         private static readonly Material BeamMat = MaterialPool.MatFrom("Other/OrbitalBeam", ShaderDatabase.MoteGlow);
         private static readonly Material BeamEndMat = MaterialPool.MatFrom("Other/OrbitalBeamEnd", ShaderDatabase.MoteGlow);
-        private static readonly MaterialPropertyBlock MatPropertyBlock = new MaterialPropertyBlock();
+        //private static readonly MaterialPropertyBlock MatPropertyBlock = new MaterialPropertyBlock();
 
         protected int TicksPassed
         {
@@ -82,7 +82,7 @@ namespace Suffixware.TrueLaserWeapons
             if (this.TicksPassed >= this.durationInTicks)
             {
                 verb.TryCastNextPulseContact();
-                this.Destroy(DestroyMode.Vanish);
+                //this.Destroy(DestroyMode.Vanish);
             }
         }
 
@@ -93,6 +93,7 @@ namespace Suffixware.TrueLaserWeapons
         /// </summary>
         public void Emit()
         {
+            Log.Message("Energy beam created");
             //Expand shoot line if beam uses its entire effective range
             if (verb.CanPierceAllInRange)
             {

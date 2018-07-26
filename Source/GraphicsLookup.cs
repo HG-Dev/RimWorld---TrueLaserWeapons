@@ -10,6 +10,7 @@ namespace Suffixware
     /// <summary>
     /// Contains links to textures that could not be included in XML files.
     /// </summary>
+    [StaticConstructorOnStartup]
     public static class GraphicsLookup
     {
         public static readonly Material Dot = MaterialPool.MatFrom("FX/RA_dot", ShaderDatabase.MoteGlow);

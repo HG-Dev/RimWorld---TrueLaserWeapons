@@ -112,10 +112,10 @@ namespace Suffixware.TrueLaserWeapons
                 }
             }
 
-            //Create beam along shootpath
-            EnergyBeam beam = (EnergyBeam)GenSpawn.Spawn(new EnergyBeam(), shootLine.Source, caster.Map);
+            EnergyBeam beam = (EnergyBeam)ThingMaker.MakeThing(ThingDefOfTLW.EnergyBeam);
             beam.verb = this;
             beam.targetSquare = shootLine.Dest;
+            GenSpawn.Spawn(beam, shootLine.Source, caster.Map);
             return true;
         }
 

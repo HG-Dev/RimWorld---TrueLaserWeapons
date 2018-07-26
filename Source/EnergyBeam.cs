@@ -82,7 +82,7 @@ namespace Suffixware.TrueLaserWeapons
             if (this.TicksPassed >= this.durationInTicks)
             {
                 verb.TryCastNextPulseContact();
-                //this.Destroy(DestroyMode.Vanish);
+                this.Destroy(DestroyMode.Vanish);
             }
         }
 

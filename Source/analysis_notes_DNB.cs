@@ -262,5 +262,25 @@ namespace Suffixware
         }
     }
 
+    /// <summary>
+    /// Check out the vector math here to offset the beam.
+    /// </summary>
+    /// <param name="center"></param>
+    /// <param name="facing"></param>
+    /// <param name="degreesWide"></param>
+    public static void DrawAimPieRaw(Vector3 center, float facing, int degreesWide)
+    {
+        if (degreesWide <= 0)
+        {
+            return;
+        }
+        if (degreesWide > 360)
+        {
+            degreesWide = 360;
+        }
+        center += Quaternion.AngleAxis(facing, Vector3.up) * Vector3.forward * 0.8f;
+        Graphics.DrawMesh(MeshPool.pies[degreesWide], center, Quaternion.AngleAxis(facing + (float)(degreesWide / 2) - 90f, Vector3.up), GenDraw.AimPieMaterial, 0);
+    }
+
 
 }

@@ -16,6 +16,7 @@ namespace Suffixware.TrueLaserWeapons
         /// Override standard projectile to a super-fast dummy projectile.
         /// </summary>
         private int pulseTicksLeft = 0;
+        private EnergyBeam activeBeam = null;
 
         //Use base.Projectile as a way to define the effect of the beam
 
@@ -112,10 +113,15 @@ namespace Suffixware.TrueLaserWeapons
                 }
             }
 
-            EnergyBeam beam = (EnergyBeam)ThingMaker.MakeThing(ThingDefOfTLW.EnergyBeam);
-            beam.verb = this;
-            beam.targetSquare = shootLine.Dest;
-            GenSpawn.Spawn(beam, shootLine.Source, caster.Map);
+            if (activeBeam == null) //Only spawn one EnergyBeam effect (no real need to spawn multiple beams)
+            {
+                activeBeam = (EnergyBeam)ThingMaker.MakeThing(ThingDefOfTLW.EnergyBeam);
+                GenSpawn.Spawn(activeBeam, shootLine.Source, caster.Map);
+            }
+
+            activeBeam.verb = this;
+            activeBeam.targetSquare = shootLine.Dest;
+            
             return true;
         }
 

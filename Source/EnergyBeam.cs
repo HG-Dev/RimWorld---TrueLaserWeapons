@@ -20,9 +20,10 @@ namespace Suffixware.TrueLaserWeapons
         private int startTick;
         public Verb_ShootBeam verb;
         public IntVec3 targetSquare;
+        public float width = 2;
+        public CompBeam beam = null;
 
-        private static readonly Material BeamMat = MaterialPool.MatFrom("Other/OrbitalBeam", ShaderDatabase.MoteGlow);
-        private static readonly Material BeamEndMat = MaterialPool.MatFrom("Other/OrbitalBeamEnd", ShaderDatabase.MoteGlow);
+
         //private static readonly MaterialPropertyBlock MatPropertyBlock = new MaterialPropertyBlock();
 
         protected int TicksPassed
@@ -35,10 +36,22 @@ namespace Suffixware.TrueLaserWeapons
             get { return this.durationInTicks - this.TicksPassed; }
         }
 
-        protected float Length
+        protected Vector3 Start
         {
-            get { return this.verb.verbProps.range; }
+            get { return verb.CasterPawn.DrawPos; }
         }
+
+        protected Vector3 Target
+        {
+            get { return targetSquare.ToVector3ShiftedWithAltitude(AltitudeLayer.Projectile); }
+        }
+
+        protected float FullLength
+        {
+            get { return verb.CanPierceAllInRange ? this.verb.verbProps.range : (Start - Target).MagnitudeHorizontal(); }
+        }
+
+
 
         public override void ExposeData()
         {
@@ -48,31 +61,8 @@ namespace Suffixware.TrueLaserWeapons
             Scribe_Values.Look<Verb_ShootBeam>(ref this.verb, "verb", new Verb_ShootBeam()); //TODO: Test loading while a beam exists
         }
 
-        /// <summary>
-        /// Renders a texture depicting a beam connecting two points.
-        /// </summary>
-        public virtual void DrawArc(Vector3 start, Vector3 end, Material mat)
-        {
-            if ((Mathf.Abs(start.x - end.x) < 0.01f && Mathf.Abs(start.z - end.z) < 0.01f)
-                || start == end)
-            {
-                //Don't bother drawing a very short arc
-                return;
-            }
-            start.y = end.y;
-            Vector3 midpoint = (start + end) / 2f;
-            float mag = (start - end).MagnitudeHorizontal();
-            Quaternion rotate = Quaternion.LookRotation(start - end);
-            Vector3 scalar = new Vector3(mag * 0.666f, 1f, mag);
-            Matrix4x4 matrix = default(Matrix4x4);
-            matrix.SetTRS(midpoint, rotate, scalar);
-            Graphics.DrawMesh(MeshPool.plane10, matrix, mat, 0);
-        }
-
         public override void Draw()
         {
-            //Assume, for now, that while this object exists it should be drawn
-            DrawArc(verb.CasterPawn.DrawPos, targetSquare.ToVector3ShiftedWithAltitude(AltitudeLayer.MoteLow), BeamMat);
             base.Comps_PostDraw();
         }
 
@@ -94,14 +84,20 @@ namespace Suffixware.TrueLaserWeapons
         public void Emit()
         {
             Log.Message("Energy beam created");
+            //Start timer
+            startTick = Find.TickManager.TicksGame;
+
             //Expand shoot line if beam uses its entire effective range
             if (verb.CanPierceAllInRange)
             {
                 //shootLine.
             }
+            this.beam = GetComp<CompBeam>();
+            beam.start = Start;
+            beam.target = Target;
+            beam.Rendering = true;
+            base.GetComp<CompAffectsSky>().StartFadeInHoldFadeOut(2, durationInTicks - 4, 2, 1f);
 
-            //Begin displaying
-            startTick = Find.TickManager.TicksGame;
             //MoteMaker.MakePowerBeamMote(stop, caster.Map);
             //Find offset for tip of weapon
 

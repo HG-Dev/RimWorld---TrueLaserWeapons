@@ -17,9 +17,24 @@
   </ThingDef>
 
   <ThingDef>
-    <defName>EnergyBeam</defName>
+    <defName>Beam_Arasaka</defName>
     <label>energy beam</label>
     <thingClass>Suffixware.TrueLaserWeapons.EnergyBeam</thingClass>
+    <comps>
+      <li Class="CompProperties_OrbitalBeam">
+        <width>0.5</width>
+        <color>(255, 77, 77, 242)</color>
+        <sound>OrbitalBeamSubtle</sound>
+      </li>
+      <li Class="CompProperties_AffectsSky">
+        <skyColors>
+          <sky>(255, 230, 200)</sky>
+          <shadow>(225, 220, 185)</shadow>
+          <overlay>(255, 255, 255)</overlay>
+          <saturation>1.05</saturation>
+        </skyColors>
+      </li>
+    </comps>
   </ThingDef>
 
   <ThingDef ParentName="BaseBullet">
@@ -67,10 +82,11 @@
     <li Class="Suffixware.TrueLaserWeapons.VerbProperties_ShootBeam">
       <flashTime>1.0</flashTime>
       <pulseTime>2.0</pulseTime>
+      <defaultBeam>Beam_Arasaka</defaultBeam>
       <verbClass>Suffixware.TrueLaserWeapons.Verb_ShootBeam</verbClass>
+      <defaultProjectile>BeamEffect_Arasaka</defaultProjectile>
       <hasStandardCommand>true</hasStandardCommand>
       <range>32</range>
-      <defaultProjectile>BeamEffect_Arasaka</defaultProjectile>
       <warmupTime>3.0</warmupTime>
       <ticksBetweenBurstShots>2</ticksBetweenBurstShots><!-- Technically, ticks between beam effects. -->
       <soundCast>ShotChargeBlaster</soundCast>

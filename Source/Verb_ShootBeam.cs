@@ -115,7 +115,7 @@ namespace Suffixware.TrueLaserWeapons
 
             if (activeBeam == null) //Only spawn one EnergyBeam effect (no real need to spawn multiple beams)
             {
-                activeBeam = (EnergyBeam)ThingMaker.MakeThing(ThingDefOfTLW.EnergyBeam);
+                activeBeam = (EnergyBeam)ThingMaker.MakeThing(beamProps.defaultBeam);
                 GenSpawn.Spawn(activeBeam, shootLine.Source, caster.Map);
             }
 

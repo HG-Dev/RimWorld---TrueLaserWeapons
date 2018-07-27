@@ -18,7 +18,7 @@ namespace Suffixware.TrueLaserWeapons
         //Whether or not this beam affects all targets along its range
         public bool canPierceAllInRange = false;
         //Since the EnergyBeam type is not a projectile, its def needs to be specified separately
-        public ThingDef defaultBeam = ThingDefOfTLW.EnergyBeam; 
+        public ThingDef defaultBeam; 
 
     }
 }

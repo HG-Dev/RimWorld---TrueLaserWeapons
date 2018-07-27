@@ -10,6 +10,6 @@ namespace Suffixware.TrueLaserWeapons
     [DefOf]
     public static class ThingDefOfTLW
     {
-        public static ThingDef EnergyBeam;
+        //public static ThingDef EnergyBeam;
     }
 }

@@ -11,6 +11,7 @@ namespace Suffixware
     /// <summary>
     /// A context-blind beam renderer.
     /// </summary>
+    [StaticConstructorOnStartup]
     class CompBeam : ThingComp
     {
         public CompProperties_OrbitalBeam Props

@@ -12,7 +12,6 @@ namespace Suffixware.TrueLaserWeapons
     /// <summary>
     /// An displayed energy beam prompted by a Verb_ShootBeam object.
     /// </summary>
-    [StaticConstructorOnStartup]
     class EnergyBeam : ThingWithComps
     {
         public int durationInTicks;

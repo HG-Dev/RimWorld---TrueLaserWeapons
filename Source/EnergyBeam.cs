@@ -97,7 +97,6 @@ namespace Suffixware.TrueLaserWeapons
             beam.Rendering = true;
             base.GetComp<CompAffectsSky>().StartFadeInHoldFadeOut(2, durationInTicks - 4, 2, 1f);
 
-            //MoteMaker.MakePowerBeamMote(stop, caster.Map);
             //Find offset for tip of weapon
 
         }

@@ -117,6 +117,7 @@ namespace Suffixware.TrueLaserWeapons
             {
                 activeBeam = (EnergyBeam)ThingMaker.MakeThing(beamProps.defaultBeam);
                 GenSpawn.Spawn(activeBeam, shootLine.Source, caster.Map);
+                activeBeam.Emit();
             }
 
             activeBeam.verb = this;
